@@ -8,10 +8,10 @@ export const resumeData = {
     links: {
       linkedin: "https://www.linkedin.com/in/yeshabhavsar/",
       github: "https://github.com/yeshacodes",
-      portfolio: "https://portfolio.com",
+      portfolio: "https://portfolio-mu-five-e095u5sooi.vercel.app/",
     },
     // This should refer to a file in the public directory
-    resumePdf: "/resume.pdf",
+    resumePdf: "/Yesha Bhavsar Resume.pdf",
     about: "I am a Computer Science student at Kennesaw State University with a strong foundation in software engineering, data structures, and algorithms. My experience spans full-stack development, AI-powered automation, and cloud systems. I am passionate about building scalable solutions and leveraging AI to solve complex problems, as demonstrated by my work on QA Copilots and recommendation systems.",
   },
   education: [
