@@ -25,7 +25,7 @@ export function Resume() {
                 </p>
               </div>
               <Button asChild size="lg" className="gap-2">
-                <a href={resumeData.personalInfo.resumePdf} download="Yesha_Bhavsar_Resume.pdf">
+                <a href={resumeData.personalInfo.resumePdf} download="Yesha Bhavsar - Resume.pdf">
                   <Download className="h-5 w-5" />
                   Download Resume (PDF)
                 </a>
