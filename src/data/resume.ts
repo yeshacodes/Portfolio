@@ -69,7 +69,7 @@ export const resumeData = {
       description:
         "Designed and implemented a customer-facing recommendation system that classifies clothing images and generates personalized outfit suggestions based on user preferences, contextual inputs, and rule-based constraints. Integrated OpenAI’s multimodal vision model to extract semantic attributes (category, color, style) from uploaded clothing images, enabling automated image understanding without manual labeling.",
       link: {
-        label: "Live",
+        label: "Live Demo",
         url: "https://ai-closet-pearl.vercel.app/",
       },
       github: "https://github.com/yeshacodes/ai-closet",
@@ -81,7 +81,7 @@ export const resumeData = {
       description:
         "Designed and built a full-stack transactional system supporting ticket purchases, order confirmation, and customer-facing purchase workflows. Implemented event-driven backend processing to handle purchase events asynchronously and manage order state changes reliably. Integrated transactional email workflows with authenticated custom domains.",
       link: {
-        label: "Live",
+        label: "Live Demo",
         url: "https://www.ticketmanagement.online/",
       },
       github: "https://github.com/yeshacodes/tickethub",
@@ -93,11 +93,23 @@ export const resumeData = {
       description:
         "Designed and built a backend service that ingests PDFs and web content, processes and chunks documents, and exposes semantic retrieval via RESTful APIs. Implemented a retrieval-augmented generation (RAG) pipeline using vector embeddings and FAISS to deliver accurate, context-aware responses.",
       link: {
-        label: "Live",
+        label: "Live Demo",
         url: "https://learn-bot-ai.vercel.app",
       },
       github: "https://github.com/yeshacodes/LearnBot-AI",
       image: "https://images.unsplash.com/photo-1532012197267-da84d127e765?q=80&w=2574&auto=format&fit=crop" // Placeholder for learning/books
+    },
+    {
+      title: "Pomodoro Timer App",
+      techStack: ["React", "Vite", "JavaScript", "CSS", "GitHub Pages"],
+      description:
+        "A modern productivity app built with React that helps users manage focus sessions using the Pomodoro technique. Includes task tracking, theme switching, and persistent state using localStorage.",
+      link: {
+        label: "Live Demo",
+        url: "https://yeshacodes.github.io/Pomodoro-Timer.github.io/",
+      },
+      github: "https://github.com/yeshacodes/Pomodoro-Timer.github.io",
+      image: "https://images.unsplash.com/photo-1501139083538-0139583c060f?q=80&w=2574&auto=format&fit=crop" // Placeholder for timer/productivity
     },
   ],
 };

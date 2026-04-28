@@ -20,7 +20,7 @@ export function Projects() {
           {resumeData.projects.map((project) => (
             <Card
               key={project.title}
-              className="overflow-hidden hover:shadow-xl transition-shadow group flex flex-col"
+              className="project-card overflow-hidden hover:shadow-xl transition-shadow group"
             >
               <div className="relative h-48 overflow-hidden bg-muted">
                 <img
@@ -29,13 +29,13 @@ export function Projects() {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
               </div>
-              <CardHeader>
+              <CardHeader className="project-card-header">
                 <CardTitle className="flex items-start justify-between">
                   <span>{project.title}</span>
                 </CardTitle>
                 <CardDescription className="line-clamp-4">{project.description}</CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4 mt-auto">
+              <CardContent className="project-card-content">
                 <div className="flex flex-wrap gap-2">
                   {project.techStack.map((tech) => (
                     <Badge key={tech} variant="outline" className="text-xs">
@@ -56,7 +56,7 @@ export function Projects() {
                       rel="noopener noreferrer"
                     >
                       <Github className="h-4 w-4 mr-2" />
-                      Code
+                      View Code
                     </a>
                   </Button>
                   {project.link && (
