@@ -111,5 +111,24 @@ export const resumeData = {
       github: "https://github.com/yeshacodes/Pomodoro-Timer.github.io",
       image: "https://images.unsplash.com/photo-1501139083538-0139583c060f?q=80&w=2574&auto=format&fit=crop" // Placeholder for timer/productivity
     },
+    {
+      title: "Mindful Micro-Journaling App",
+      techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase", "OpenAI API"],
+      description:
+        "A calm, AI-powered journaling platform that helps users reflect on their thoughts and track emotional patterns over time. Built with a focus on simplicity, mental clarity, and meaningful self-reflection.",
+      features: [
+        "Secure authentication with email and Google OAuth using Supabase",
+        "AI-generated journaling prompts",
+        "Mood tracking with weekly and monthly insights",
+        "Interactive calendar view to explore entries by date",
+        "Clean, minimal UI designed for a calming user experience",
+      ],
+      link: {
+        label: "Live Demo",
+        url: "https://mindful-journaling-app.vercel.app/",
+      },
+      github: "https://github.com/yeshacodes/Mindful-Journaling-App",
+      image: "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=2573&auto=format&fit=crop" // Placeholder for journaling
+    },
   ],
 };

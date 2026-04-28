@@ -1801,6 +1801,20 @@ html {
   margin-top: auto;
 }
 
+.project-feature-list {
+  color: var(--muted-foreground);
+  display: grid;
+  gap: 0.35rem;
+  list-style: disc;
+  margin-top: 0.75rem;
+  padding-left: 1rem;
+}
+
+.project-feature-list li {
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
 @media (max-width: 47.999rem) {
   .project-card-header {
     min-height: auto;

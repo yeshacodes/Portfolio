@@ -34,6 +34,13 @@ export function Projects() {
                   <span>{project.title}</span>
                 </CardTitle>
                 <CardDescription className="line-clamp-4">{project.description}</CardDescription>
+                {'features' in project && project.features?.length ? (
+                  <ul className="project-feature-list">
+                    {project.features.map((feature) => (
+                      <li key={feature}>{feature}</li>
+                    ))}
+                  </ul>
+                ) : null}
               </CardHeader>
               <CardContent className="project-card-content">
                 <div className="flex flex-wrap gap-2">
