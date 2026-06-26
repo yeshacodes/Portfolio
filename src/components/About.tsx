@@ -1,81 +1,126 @@
-import { GraduationCap, Brain, Code, Cloud, Globe, Cpu } from 'lucide-react';
-import { Card, CardContent } from './ui/card';
-import { resumeData } from '../data/resume';
+import { useEffect, useRef } from 'react';
+
+const chips = [
+  'Atlanta, GA',
+  'KSU CS · May 2026',
+  'Painting',
+  'Badminton',
+  'Travel',
+];
+
+const stats = [
+  { num: '3.75', lbl: 'GPA at KSU · UPE Honor Society' },
+  { num: '5+',   lbl: 'Projects shipped' },
+  { num: '173',  lbl: 'Orders/sec in load testing' },
+  { num: '30%',  lbl: 'Test coverage increase at LexisNexis' },
+];
+
+const chapters = [
+  {
+    label: 'What I work on',
+    text: (
+      <>
+        Mostly <strong>full-stack and backend</strong> — APIs, distributed systems, the parts
+        that have to not fall over. I like building the whole thing and seeing it actually
+        work, not just one slice of it.
+      </>
+    ),
+  },
+  {
+    label: 'How I work',
+    text: (
+      <>
+        I like understanding how something works end to end, not just the piece I'm handed.
+        And I care about things being reliable and actually pleasant to use, not just working
+        on my machine.
+      </>
+    ),
+  },
+  {
+    label: 'Outside work',
+    text: (
+      <>
+        Painting, badminton, and hunting down good places to eat. I get bored easily, so
+        there's usually something I'm building or learning on the side.
+      </>
+    ),
+  },
+];
 
 export function About() {
-  const interestIcons = [Brain, Code, Cloud, Globe, Cpu];
+  const rightRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('in');
+            observer.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    rightRef.current?.querySelectorAll('.st-chapter, .st-reveal').forEach((el) =>
+      observer.observe(el)
+    );
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <section id="about" className="py-20 bg-muted/30">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">About Me</h2>
-          <div className="w-20 h-1 bg-primary mx-auto" />
+    <section id="about" className="st-about-section">
+      <div className="st-about-sticky-container">
+
+        {/* Left — sticky quote */}
+        <div className="st-about-left">
+          <span className="st-label" style={{ marginBottom: '1.25rem' }}>About Me</span>
+          <h2 className="st-about-quote">
+            I build software<br />
+            and like figuring out<br />
+            <em>how things work.</em>
+          </h2>
+          <p className="st-about-location">Full-Stack Engineer · Atlanta, GA</p>
+          <div className="st-chips">
+            {chips.map((chip) => (
+              <span key={chip} className="st-chip">{chip}</span>
+            ))}
+          </div>
+          <p style={{
+            fontFamily: 'var(--st-sans)',
+            fontSize: '0.78rem',
+            color: 'var(--st-rust)',
+            fontWeight: 500,
+            marginTop: '1.5rem',
+            letterSpacing: '0.01em',
+          }}>
+            Open to full-time roles in full-stack, backend, and AI.
+          </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 items-start">
-          {/* Bio */}
-          <div className="space-y-4">
-            <p className="text-lg leading-relaxed">
-              I am currently pursuing my Bachelor of Science in Computer Science at Kennesaw State University, where I have developed a strong foundation in core computer science concepts and modern software development practices.
-            </p>
-            <p className="text-lg leading-relaxed">
-              Throughout my academic journey, I have worked on projects involving full-stack web development, AI-powered applications, and cloud-based systems. I enjoy designing software that is both scalable and user-focused, and I am particularly interested in areas such as artificial intelligence, web development, and cloud computing.
-            </p>
-            <p className="text-lg leading-relaxed">
-              I am always eager to learn new technologies and apply them to real-world problems. My goal is to continue growing as a software engineer by building impactful systems, collaborating with talented teams, and contributing to innovative technology solutions.
-            </p>
-          </div>
+        {/* Right — scrolling chapters */}
+        <div className="st-about-right" ref={rightRef}>
+          {chapters.map((ch) => (
+            <div key={ch.label} className="st-chapter">
+              <p className="st-chapter-label">{ch.label}</p>
+              <p className="st-chapter-text">{ch.text}</p>
+            </div>
+          ))}
 
-          {/* Education & Interests */}
-          <div className="space-y-6">
-            <Card>
-              <CardContent className="pt-6">
-                <div className="flex items-start gap-4">
-                  <div className="p-3 bg-primary/10 rounded-lg">
-                    <GraduationCap className="h-6 w-6 text-primary" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-semibold mb-1">Education</h3>
-                    <p className="text-sm font-medium">
-                      {resumeData.education[0].degree}
-                    </p>
-                    <p className="text-sm text-muted-foreground mb-1">
-                      {resumeData.education[0].school}
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                      Expected Graduation: {resumeData.education[0].graduationDate}
-                    </p>
-                    <p className="text-sm text-muted-foreground mt-2">
-                      GPA: {resumeData.education[0].gpa}
-                    </p>
-                    <p className="text-sm text-muted-foreground mt-1">
-                      Honors: {resumeData.education[0].honors}
-                    </p>
-                  </div>
+          {/* Stats grid as final chapter */}
+          <div className="st-chapter">
+            <p className="st-chapter-label">By the numbers</p>
+            <div className="st-about-stats">
+              {stats.map((s) => (
+                <div key={s.num} className="st-about-stat">
+                  <div className="st-stat-num">{s.num}</div>
+                  <div className="st-stat-lbl">{s.lbl}</div>
                 </div>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardContent className="pt-6">
-                <h3 className="font-semibold mb-4">Areas of Interest</h3>
-                <div className="grid grid-cols-1 gap-3">
-                  {resumeData.skills.concepts.map((interest, index) => {
-                    const Icon = interestIcons[index] ?? Code;
-
-                    return (
-                      <div key={interest} className="flex items-center gap-3">
-                        <Icon className="h-5 w-5 text-primary" />
-                        <span className="text-sm">{interest}</span>
-                      </div>
-                    );
-                  })}
-                </div>
-              </CardContent>
-            </Card>
+              ))}
+            </div>
           </div>
         </div>
+
       </div>
     </section>
   );

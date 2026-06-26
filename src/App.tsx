@@ -1,25 +1,23 @@
 import { Navigation } from './components/Navigation';
 import { Hero } from './components/Hero';
-import { About } from './components/About';
-import { Skills } from './components/Skills';
-import { Coursework } from './components/Coursework';
+import { Building } from './components/Building';
+import { OutsideOfCode } from './components/OutsideOfCode';
 import { Projects } from './components/Projects';
-import { Experience } from './components/Experience';
+import { Now } from './components/Now';
 import { Resume } from './components/Resume';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 
 export default function App() {
   return (
-    <div className="min-h-screen">
+    <div className="ed-page">
       <Navigation />
       <main>
         <Hero />
-        <About />
-        <Skills />
-        <Coursework />
+        <Building />
+        <OutsideOfCode />
         <Projects />
-        <Experience />
+        <Now />
         <Resume />
         <Contact />
       </main>

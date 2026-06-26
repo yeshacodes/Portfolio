@@ -1,41 +1,26 @@
-import { Download, FileText } from 'lucide-react';
-import { Button } from './ui/button';
-import { Card, CardContent } from './ui/card';
+import { useReveal } from '../hooks/useReveal';
 import { resumeData } from '../data/resume';
 
 export function Resume() {
-  return (
-    <section id="resume" className="py-20 bg-muted/30">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">Resume</h2>
-          <div className="w-20 h-1 bg-primary mx-auto" />
-        </div>
+  const ref = useReveal<HTMLDivElement>();
+  const pdf = resumeData.personalInfo.resumePdf;
 
-        <Card className="text-center">
-          <CardContent className="pt-12 pb-12">
-            <div className="flex flex-col items-center gap-6">
-              <div className="p-6 bg-primary/10 rounded-full">
-                <FileText className="h-16 w-16 text-primary" />
-              </div>
-              <div className="space-y-2">
-                <h3 className="text-xl font-semibold">Download My Resume</h3>
-                <p className="text-muted-foreground max-w-md">
-                  Get a detailed overview of my education, skills, experience, and projects in PDF format.
-                </p>
-              </div>
-              <Button asChild size="lg" className="gap-2">
-                <a href={resumeData.personalInfo.resumePdf} download="Yesha_Bhavsar_Resume.pdf">
-                  <Download className="h-5 w-5" />
-                  Download Resume (PDF)
-                </a>
-              </Button>
-              <p className="text-xs text-muted-foreground">
-                Last updated: {new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
-              </p>
-            </div>
-          </CardContent>
-        </Card>
+  return (
+    <section id="resume" className="ed-section ed-section--linen">
+      <div className="ed-wrap ed-resume" ref={ref}>
+        <p className="ed-eyebrow ed-reveal">The full record</p>
+        <h2 className="ed-h2 ed-reveal d1">Want the resume?</h2>
+        <p className="ed-resume-p ed-reveal d2">
+          Work history, projects, and the LexisNexis internship — all in one PDF.
+        </p>
+        <div className="ed-resume-actions ed-reveal d3">
+          <a className="ed-btn ed-btn-dark" href={pdf} target="_blank" rel="noopener noreferrer">
+            View resume <span className="ed-arrow">↗</span>
+          </a>
+          <a className="ed-btn ed-btn-ghost" href={pdf} download="Yesha_Bhavsar_Resume.pdf">
+            Download PDF ↓
+          </a>
+        </div>
       </div>
     </section>
   );

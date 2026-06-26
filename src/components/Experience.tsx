@@ -1,64 +1,92 @@
-import { Briefcase, Calendar } from 'lucide-react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
+import { useEffect, useRef } from 'react';
 import { resumeData } from '../data/resume';
 
 export function Experience() {
-  return (
-    <section id="experience" className="py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">Experience</h2>
-          <div className="w-20 h-1 bg-primary mx-auto" />
-          <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-            Professional and academic experiences that have shaped my technical expertise
-          </p>
-        </div>
+  const sectionRef = useRef<HTMLElement>(null);
 
-        <div className="space-y-6">
-          {resumeData.experience.map((exp, index) => (
-            <Card
-              key={index}
-              className="hover:shadow-lg transition-shadow"
-            >
-              <CardHeader>
-                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
-                  <div className="flex-1">
-                    <CardTitle className="flex items-center gap-2">
-                      <Briefcase className="h-5 w-5 text-primary" />
-                      {exp.role}
-                    </CardTitle>
-                    <CardDescription className="text-base mt-1">
-                      {exp.company} • {exp.location}
-                    </CardDescription>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Calendar className="h-4 w-4" />
-                    {exp.date}
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <ul className="space-y-2">
-                  {exp.description.map((item, i) => (
-                    <li key={i} className="flex items-start gap-2">
-                      <span className="text-primary mt-1.5">•</span>
-                      <span className="flex-1 text-sm sm:text-base">{item}</span>
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('in');
+            observer.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.08 }
+    );
+    sectionRef.current?.querySelectorAll('.st-reveal').forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  const edu = resumeData.education[0];
+  const exp = resumeData.experience[0];
+
+  const skillGroups = [
+    { label: 'Languages',              skills: resumeData.skills.languages },
+    { label: 'Backend & APIs',         skills: resumeData.skills.backend },
+    { label: 'Cloud & Databases',      skills: resumeData.skills.cloud },
+    { label: 'AI & Data',              skills: resumeData.skills.ai },
+    { label: 'Frontend',               skills: resumeData.skills.frontend },
+    { label: 'DevOps & Observability', skills: resumeData.skills.devops },
+    { label: 'Concepts',               skills: resumeData.skills.concepts },
+  ];
+
+  return (
+    <section id="experience" ref={sectionRef} className="st-exp-section">
+      <div className="st-wrap">
+        <span className="st-label st-reveal">Background</span>
+        <h2 className="st-h2 st-reveal d1" style={{ marginBottom: 0 }}>
+          Experience & <em>Skills</em>
+        </h2>
+
+        <div className="st-exp-grid">
+
+          {/* Left: timeline + education */}
+          <div>
+            <div className="st-tl-item st-reveal d2">
+              <div className="st-tl-company">{exp.company}</div>
+              <div className="st-tl-role">{exp.role}</div>
+              <div className="st-tl-period">{exp.location} &nbsp;&middot;&nbsp; {exp.date}</div>
+              <ul className="st-tl-bullets">
+                {exp.description.map((item, i) => {
+                  const parts = item.split(/(\~?\d+[\+%]?(?:\s*(?:pages?|endpoints?|workflows?|hours?|orders?\/sec|K\+))?)/g);
+                  return (
+                    <li key={i}>
+                      {parts.map((part, j) =>
+                        /\~?\d/.test(part)
+                          ? <strong key={j}>{part}</strong>
+                          : part
+                      )}
                     </li>
-                  ))}
-                </ul>
-                <div className="flex flex-wrap gap-2 pt-2 border-t">
-                  {exp.technologies.map((tech) => (
-                    <span
-                      key={tech}
-                      className="text-xs px-2 py-1 bg-muted rounded-md"
-                    >
-                      {tech}
-                    </span>
+                  );
+                })}
+              </ul>
+            </div>
+
+            <div className="st-edu-card st-reveal d3">
+              <div className="st-edu-school">{edu.school}</div>
+              <div className="st-edu-degree">{edu.degree} &nbsp;&middot;&nbsp; {edu.graduationDate}</div>
+              <span className="st-edu-badge">GPA {edu.gpa} &nbsp;&middot;&nbsp; {edu.honors}</span>
+              <p className="st-edu-courses">{edu.coursework}</p>
+            </div>
+          </div>
+
+          {/* Right: skills */}
+          <div className="st-reveal d2">
+            {skillGroups.map((group) => (
+              <div key={group.label} className="st-skill-group">
+                <span className="st-skill-group-label">{group.label}</span>
+                <div className="st-skill-tags">
+                  {group.skills.map((skill) => (
+                    <span key={skill} className="st-stag">{skill}</span>
                   ))}
                 </div>
-              </CardContent>
-            </Card>
-          ))}
+              </div>
+            ))}
+          </div>
+
         </div>
       </div>
     </section>

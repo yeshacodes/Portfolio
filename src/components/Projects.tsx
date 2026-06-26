@@ -1,92 +1,102 @@
-import { ExternalLink, Github } from 'lucide-react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
-import { Badge } from './ui/badge';
-import { Button } from './ui/button';
+import { useReveal } from '../hooks/useReveal';
+import { Placeholder } from './Placeholder';
 import { resumeData } from '../data/resume';
 
+type Project = typeof resumeData.projects[number];
+
+function fallbackMetrics(p: Project) {
+  // Projects without an explicit metrics array still get a single highlight.
+  return [{ value: (p as any).impact ? '' : '', desc: '' }];
+}
+
 export function Projects() {
+  const ref = useReveal<HTMLDivElement>();
+  const projects = resumeData.projects;
+
   return (
-    <section id="projects" className="py-20 bg-muted/30">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">Featured Projects</h2>
-          <div className="w-20 h-1 bg-primary mx-auto" />
-          <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-            A selection of projects showcasing my technical abilities and problem-solving approach
-          </p>
+    <section id="projects" className="ed-section">
+      <div className="ed-wrap" ref={ref}>
+        <div className="ed-proj-head">
+          <div>
+            <p className="ed-eyebrow ed-reveal">Selected work</p>
+            <h2 className="ed-h2 ed-reveal d1">Projects, as stories</h2>
+          </div>
+          <span className="ed-proj-count ed-reveal d2">
+            {String(projects.length).padStart(2, '0')} projects · full-stack, AI, distributed systems
+          </span>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-6">
-          {resumeData.projects.map((project) => (
-            <Card
-              key={project.title}
-              className="project-card overflow-hidden hover:shadow-xl transition-shadow group"
-            >
-              <div className="relative h-48 overflow-hidden bg-muted">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                />
+        {projects.map((p, i) => {
+          const metrics =
+            'metrics' in p && Array.isArray((p as any).metrics)
+              ? ((p as any).metrics as Array<{ value: string; desc: string }>)
+              : fallbackMetrics(p);
+          const showMetrics = metrics.some((m) => m.value);
+
+          return (
+            <article key={p.title} className="ed-proj ed-reveal">
+              <div className="ed-proj-head-row">
+                <p className="ed-proj-index">{String(i + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}</p>
+                <p className="ed-proj-cat">{(p as any).category}</p>
+                <h3 className="ed-h3 ed-proj-title">{p.title}</h3>
+                <p className="ed-proj-sub">{p.subtitle}</p>
               </div>
-              <CardHeader className="project-card-header">
-                <CardTitle className="flex items-start justify-between">
-                  <span>{project.title}</span>
-                </CardTitle>
-                <CardDescription className="line-clamp-4">{project.description}</CardDescription>
-                {'features' in project && project.features?.length ? (
-                  <ul className="project-feature-list">
-                    {project.features.map((feature) => (
-                      <li key={feature}>{feature}</li>
-                    ))}
-                  </ul>
-                ) : null}
-              </CardHeader>
-              <CardContent className="project-card-content">
-                <div className="flex flex-wrap gap-2">
-                  {project.techStack.map((tech) => (
-                    <Badge key={tech} variant="outline" className="text-xs">
-                      {tech}
-                    </Badge>
-                  ))}
+
+              <div className="ed-proj-visual">
+                <Placeholder ratio="2 / 1" label={p.title} hint="Project screenshot or visual" src={(p as any).image} alt={p.title} />
+              </div>
+
+              <div className="ed-proj-detail">
+                <div className="ed-proj-story">
+                  <div className="ed-proj-story-row">
+                    <span className="ed-proj-story-label">Problem</span>
+                    <span className="ed-proj-story-text">{(p as any).problem}</span>
+                  </div>
+                  <div className="ed-proj-story-row">
+                    <span className="ed-proj-story-label">Built</span>
+                    <span className="ed-proj-story-text">{(p as any).built}</span>
+                  </div>
+                  <div className="ed-proj-story-row">
+                    <span className="ed-proj-story-label">Impact</span>
+                    <span className="ed-proj-story-text">{(p as any).impact}</span>
+                  </div>
                 </div>
-                <div className="flex gap-2">
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    className="flex-1"
-                    asChild
-                  >
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Github className="h-4 w-4 mr-2" />
-                      View Code
-                    </a>
-                  </Button>
-                  {project.link && (
-                    <Button
-                      size="sm"
-                      className="flex-1"
-                      asChild
-                    >
-                      <a
-                        href={project.link.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <ExternalLink className="h-4 w-4 mr-2" />
-                        {project.link.label}
-                      </a>
-                    </Button>
+
+                <div className="ed-proj-aside">
+                  {showMetrics && (
+                    <div className="ed-proj-metrics">
+                      {metrics.filter((m) => m.value).map((m) => (
+                        <div key={m.value}>
+                          <div className="ed-proj-metric-val">{m.value}</div>
+                          <div className="ed-proj-metric-desc">{m.desc}</div>
+                        </div>
+                      ))}
+                    </div>
                   )}
+
+                  <div className="ed-proj-tags">
+                    {p.techStack.map((t) => (
+                      <span key={t} className="ed-proj-tag">{t}</span>
+                    ))}
+                  </div>
+
+                  <div className="ed-proj-links">
+                    {(p as any).link && (
+                      <a className="ed-link ed-link--accent" href={(p as any).link.url} target="_blank" rel="noopener noreferrer">
+                        {(p as any).link.label} <span className="ed-arrow">↗</span>
+                      </a>
+                    )}
+                    {(p as any).github && (
+                      <a className="ed-link" href={(p as any).github} target="_blank" rel="noopener noreferrer">
+                        GitHub <span className="ed-arrow">↗</span>
+                      </a>
+                    )}
+                  </div>
                 </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+              </div>
+            </article>
+          );
+        })}
       </div>
     </section>
   );

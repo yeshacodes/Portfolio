@@ -1,109 +1,80 @@
 import { useState, useEffect } from 'react';
-import { Moon, Sun, Menu, X } from 'lucide-react';
-import { Button } from './ui/button';
+import { Menu, X } from 'lucide-react';
+
+const navItems = [
+  { id: 'building', label: 'Building' },
+  { id: 'outside', label: 'Outside of Code' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'now', label: 'Now' },
+];
 
 export function Navigation() {
-  const [isDark, setIsDark] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 40);
+      const total = document.body.scrollHeight - window.innerHeight;
+      setProgress(total > 0 ? (window.scrollY / total) * 100 : 0);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const toggleDarkMode = () => {
-    setIsDark(!isDark);
-    document.documentElement.classList.toggle('dark');
+  const go = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    setOpen(false);
   };
-
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setIsMenuOpen(false);
-    }
-  };
-
-  const navItems = [
-    { id: 'about', label: 'About' },
-    { id: 'skills', label: 'Skills' },
-    { id: 'coursework', label: 'Coursework' },
-    { id: 'projects', label: 'Projects' },
-    { id: 'experience', label: 'Experience' },
-    { id: 'resume', label: 'Resume' },
-    { id: 'contact', label: 'Contact' },
-  ];
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-background/80 backdrop-blur-md shadow-sm' : 'bg-transparent'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <button
-            onClick={() => scrollToSection('hero')}
-            className="font-semibold text-lg hover:text-primary/80 transition-colors"
-          >
-            Portfolio
+    <>
+      <div className="ed-nav-progress" style={{ width: `${progress}%` }} aria-hidden="true" />
+      <nav className={`ed-nav${scrolled ? ' scrolled' : ''}`}>
+        <div className="ed-nav-inner">
+          <button className="ed-nav-logo" onClick={() => go('hero')}>
+            Yesha Bhavsar<span className="dot">.</span>
           </button>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-6">
+          <ul className="ed-nav-links">
             {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className="text-sm hover:text-primary transition-colors"
-              >
-                {item.label}
-              </button>
+              <li key={item.id}>
+                <button className="ed-nav-link" onClick={() => go(item.id)}>
+                  {item.label}
+                </button>
+              </li>
             ))}
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={toggleDarkMode}
-              className="ml-2"
-            >
-              {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-            </Button>
-          </div>
+            <li>
+              <button className="ed-nav-cta" onClick={() => go('contact')}>
+                Say hello
+              </button>
+            </li>
+          </ul>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center gap-2">
-            <Button variant="ghost" size="sm" onClick={toggleDarkMode}>
-              {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-            </Button>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </Button>
-          </div>
+          <button
+            className="ed-nav-burger"
+            aria-label="Toggle menu"
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <X size={22} /> : <Menu size={22} />}
+          </button>
         </div>
+      </nav>
 
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="md:hidden py-4 bg-background border-t">
-            {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className="block w-full text-left px-4 py-2 hover:bg-accent transition-colors"
-              >
-                {item.label}
-              </button>
-            ))}
-          </div>
-        )}
-      </div>
-    </nav>
+      {open && (
+        <div className="ed-mobile-menu">
+          {navItems.map((item) => (
+            <button key={item.id} className="ed-mobile-link" onClick={() => go(item.id)}>
+              {item.label}
+            </button>
+          ))}
+          <button className="ed-mobile-link" style={{ color: 'var(--ed-accent)' }} onClick={() => go('contact')}>
+            Say hello
+          </button>
+        </div>
+      )}
+    </>
   );
 }

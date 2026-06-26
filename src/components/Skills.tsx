@@ -4,34 +4,13 @@ import { resumeData } from '../data/resume';
 
 export function Skills() {
   const skillCategories = [
-    {
-      title: 'Programming Languages',
-      skills: resumeData.skills.languages,
-    },
-    {
-      title: 'Backend & APIs',
-      skills: resumeData.skills.backend,
-    },
-    {
-      title: 'Cloud Platforms',
-      skills: resumeData.skills.cloud,
-    },
-    {
-      title: 'Data & Managed Services',
-      skills: resumeData.skills.data,
-    },
-    {
-      title: 'Systems, Testing & DevOps',
-      skills: resumeData.skills.testingops,
-    },
-    {
-      title: 'Frontend',
-      skills: resumeData.skills.frontend,
-    },
-    {
-      title: 'Core CS & Systems Concepts',
-      skills: resumeData.skills.concepts,
-    },
+    { title: 'Languages',              skills: resumeData.skills.languages },
+    { title: 'Backend & APIs',         skills: resumeData.skills.backend },
+    { title: 'Cloud & Databases',      skills: resumeData.skills.cloud },
+    { title: 'AI & Data',              skills: resumeData.skills.ai },
+    { title: 'Frontend',               skills: resumeData.skills.frontend },
+    { title: 'DevOps & Observability', skills: resumeData.skills.devops },
+    { title: 'Concepts',               skills: resumeData.skills.concepts },
   ];
 
   return (
@@ -53,7 +32,7 @@ export function Skills() {
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">
-                  {category.skills.map((skill) => (
+                  {category.skills.map((skill: string) => (
                     <Badge
                       key={skill}
                       variant="secondary"
