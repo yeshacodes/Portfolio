@@ -22,6 +22,7 @@ export function Experience() {
 
   const edu = resumeData.education[0];
   const exp = resumeData.experience[0];
+  const certifications = resumeData.certifications;
 
   const skillGroups = [
     { label: 'Languages',              skills: resumeData.skills.languages },
@@ -70,6 +71,13 @@ export function Experience() {
               <div className="st-edu-degree">{edu.degree} &nbsp;&middot;&nbsp; {edu.graduationDate}</div>
               <span className="st-edu-badge">GPA {edu.gpa} &nbsp;&middot;&nbsp; {edu.honors}</span>
               <p className="st-edu-courses">{edu.coursework}</p>
+              <div className="st-edu-certs">
+                {certifications.map((cert) => (
+                  <span key={cert.name} className="st-edu-badge">
+                    {cert.name} &nbsp;&middot;&nbsp; {cert.issuer} &nbsp;&middot;&nbsp; {cert.date}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
 

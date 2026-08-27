@@ -5,7 +5,7 @@ import { Placeholder } from './Placeholder';
 // Restaurants are travel stand-ins until dedicated photos exist — swap `src`.
 const moments = [
   { cat: 'Travel', note: 'New places, often.', src: '/images/place-6.JPEG', ratio: '4 / 3' },
-  { cat: 'Painting', note: 'When I need to slow down.', src: '/images/place-4.JPEG', ratio: '3 / 4' },
+  { cat: 'Painting', note: 'When I need to slow down.', src: '/images/painting.png', ratio: '3 / 4' },
   { cat: 'Hiking', note: 'Mostly for the view.', src: '/images/place-5.JPEG', ratio: '3 / 4' },
   { cat: 'New Restaurants', note: 'Always hunting.', src: '/images/food.JPEG', ratio: '4 / 5' },
   { cat: 'Exploring', note: 'Wandering, no plan.', src: '/images/place-2.JPEG', ratio: '4 / 3' },
