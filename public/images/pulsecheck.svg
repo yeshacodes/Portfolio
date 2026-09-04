@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 800" role="img" aria-labelledby="title desc">
+  <title id="title">PulseCheck monitoring dashboard</title>
+  <desc id="desc">A light uptime-monitoring dashboard showing operational services, uptime, response times, and a thirty-day response chart.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f7faf9"/>
+      <stop offset="1" stop-color="#edf7f4"/>
+    </linearGradient>
+    <linearGradient id="chart" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a9b77" stop-opacity=".28"/>
+      <stop offset="1" stop-color="#0a9b77" stop-opacity=".02"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#13382f" flood-opacity=".09"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="800" fill="url(#bg)"/>
+  <rect x="58" y="42" width="1484" height="716" rx="24" fill="#ffffff" stroke="#dce8e4" filter="url(#shadow)"/>
+
+  <path d="M58 118h1484" stroke="#e3ebe8"/>
+  <rect x="92" y="66" width="34" height="34" rx="10" fill="#d9f3eb" stroke="#a9dfcf"/>
+  <path d="M100 84h6l4-10 6 21 5-11h7" fill="none" stroke="#078b6b" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="141" y="92" font-family="Inter,Arial,sans-serif" font-size="24" font-weight="750" fill="#111827">Pulse<tspan fill="#078b6b">Check</tspan></text>
+  <text x="294" y="91" font-family="Inter,Arial,sans-serif" font-size="15" fill="#536174">Dashboard</text>
+  <text x="394" y="91" font-family="Inter,Arial,sans-serif" font-size="15" fill="#536174">Add monitor</text>
+  <circle cx="1424" cy="84" r="5" fill="#10b981"/>
+  <text x="1438" y="90" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="600" fill="#536174">All systems operational</text>
+
+  <text x="94" y="164" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="700" letter-spacing="1.6" fill="#078b6b">OVERVIEW</text>
+  <text x="94" y="204" font-family="Inter,Arial,sans-serif" font-size="30" font-weight="760" fill="#111827">Service health at a glance</text>
+  <text x="94" y="232" font-family="Inter,Arial,sans-serif" font-size="14" fill="#718096">Scheduled endpoint checks, response-time history, and incident tracking.</text>
+  <rect x="1348" y="178" width="146" height="44" rx="12" fill="#078b6b"/>
+  <text x="1372" y="206" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="700" fill="#ffffff">+ Add monitor</text>
+
+  <g filter="url(#shadow)">
+    <rect x="94" y="270" width="258" height="112" rx="16" fill="#ffffff" stroke="#dfe8e5"/>
+    <rect x="374" y="270" width="258" height="112" rx="16" fill="#ffffff" stroke="#dfe8e5"/>
+    <rect x="654" y="270" width="258" height="112" rx="16" fill="#ffffff" stroke="#dfe8e5"/>
+    <rect x="934" y="270" width="258" height="112" rx="16" fill="#ffffff" stroke="#dfe8e5"/>
+  </g>
+  <text x="118" y="304" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="700" letter-spacing="1" fill="#718096">UPTIME (30D)</text>
+  <text x="118" y="350" font-family="Inter,Arial,sans-serif" font-size="34" font-weight="760" fill="#111827">99.98%</text>
+  <text x="398" y="304" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="700" letter-spacing="1" fill="#718096">OPERATIONAL</text>
+  <text x="398" y="350" font-family="Inter,Arial,sans-serif" font-size="34" font-weight="760" fill="#078b6b">4</text>
+  <text x="678" y="304" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="700" letter-spacing="1" fill="#718096">AVG RESPONSE</text>
+  <text x="678" y="350" font-family="Inter,Arial,sans-serif" font-size="34" font-weight="760" fill="#111827">142 ms</text>
+  <text x="958" y="304" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="700" letter-spacing="1" fill="#718096">ACTIVE INCIDENTS</text>
+  <text x="958" y="350" font-family="Inter,Arial,sans-serif" font-size="34" font-weight="760" fill="#111827">0</text>
+
+  <rect x="1214" y="270" width="280" height="410" rx="16" fill="#f8fbfa" stroke="#dfe8e5"/>
+  <text x="1242" y="310" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="750" fill="#111827">MONITORS</text>
+  <g font-family="Inter,Arial,sans-serif">
+    <circle cx="1248" cy="350" r="6" fill="#10b981"/>
+    <text x="1266" y="355" font-size="15" font-weight="650" fill="#1f2937">AI Closet</text>
+    <text x="1266" y="376" font-size="12" fill="#718096">74 ms · 100% uptime</text>
+    <path d="M1242 400h224" stroke="#e1e9e6"/>
+    <circle cx="1248" cy="434" r="6" fill="#10b981"/>
+    <text x="1266" y="439" font-size="15" font-weight="650" fill="#1f2937">Portfolio</text>
+    <text x="1266" y="460" font-size="12" fill="#718096">103 ms · 100% uptime</text>
+    <path d="M1242 484h224" stroke="#e1e9e6"/>
+    <circle cx="1248" cy="518" r="6" fill="#10b981"/>
+    <text x="1266" y="523" font-size="15" font-weight="650" fill="#1f2937">LearnBot API</text>
+    <text x="1266" y="544" font-size="12" fill="#718096">188 ms · 99.9% uptime</text>
+    <path d="M1242 568h224" stroke="#e1e9e6"/>
+    <circle cx="1248" cy="602" r="6" fill="#10b981"/>
+    <text x="1266" y="607" font-size="15" font-weight="650" fill="#1f2937">PulseCheck</text>
+    <text x="1266" y="628" font-size="12" fill="#718096">201 ms · 100% uptime</text>
+  </g>
+
+  <rect x="94" y="412" width="1098" height="268" rx="16" fill="#ffffff" stroke="#dfe8e5"/>
+  <text x="120" y="450" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="750" fill="#111827">RESPONSE TIME</text>
+  <text x="1058" y="450" font-family="Inter,Arial,sans-serif" font-size="12" fill="#718096">Last 30 days</text>
+  <g stroke="#e7eeeb" stroke-width="1">
+    <path d="M120 494h1042"/><path d="M120 542h1042"/><path d="M120 590h1042"/><path d="M120 638h1042"/>
+  </g>
+  <path d="M120 610 C190 594 226 606 292 568 S410 588 474 550 S590 576 656 525 S770 564 834 535 S956 552 1018 498 S1110 524 1162 486 L1162 638 L120 638Z" fill="url(#chart)"/>
+  <path d="M120 610 C190 594 226 606 292 568 S410 588 474 550 S590 576 656 525 S770 564 834 535 S956 552 1018 498 S1110 524 1162 486" fill="none" stroke="#078b6b" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="1162" cy="486" r="6" fill="#ffffff" stroke="#078b6b" stroke-width="4"/>
+</svg>
