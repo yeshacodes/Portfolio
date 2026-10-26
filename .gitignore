@@ -17,3 +17,10 @@ yarn-error.log*
 
 # system files
 .DS_Store
+
+# local dependency cache
+.npm-cache/
+
+# TypeScript build info written by `npm run typecheck`
+*.tsbuildinfo
+
