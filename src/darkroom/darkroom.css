@@ -69,8 +69,9 @@ html:has(.dr) { scroll-behavior: auto; }
 .dr-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
 .dr-actions a, .dr-actions button { display: inline-flex; align-items: center; gap: 7px; font: 500 14px var(--body); color: var(--fg); text-decoration: none; background: transparent; border: 1px solid var(--rule); border-radius: 999px; padding: 10px 16px; cursor: pointer; min-height: 44px; }
 .dr-actions .is-solid { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.dr-actions .dr-cv-pair { display: inline-flex; gap: 10px; }          /* open and download the résumé: always side by side */
 
-/* ---------- 2. about: the words for print 001 (no second portrait) ---------- */
+/* ---------- 2. about: the words for the hero's print (no second portrait) ---------- */
 .dr-about { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 6vw; align-items: start; padding-block: 12vh 10vh; }
 .dr-copy { display: grid; gap: 14px; }
 .dr-copy p:not(.dr-mono) { margin: 0; color: var(--fg-soft); font-size: 16.5px; line-height: 1.7; max-width: 62ch; }

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { ArrowLeft, ArrowRight, ArrowUpRight, Copy, Github, Linkedin, Mail, Menu, X } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ArrowUpRight, Copy, Download, Github, Linkedin, Mail, Menu, X } from 'lucide-react';
 import { Hero } from '../components/Hero';
 import { resumeData } from '../data/resume';
 import { CAREGAP } from './caregap';
@@ -29,7 +29,7 @@ const withCopy = (w: Work): Work => {
 };
 const BASE = (resumeData.projects as readonly Work[]).map(withCopy);
 const WORK: Work[] = [BASE[0], CAREGAP, BASE[1], withCopy(PULSECHECK), ...BASE.slice(2)];
-const printNo = (i: number) => String(i + 2).padStart(3, '0');       // print 001 is the hero
+const printNo = (i: number) => String(i + 1).padStart(3, '0');       // projects are numbered 001–007 in line order
 const COUNT = ['No', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten'][WORK.length] ?? String(WORK.length);
 
 // Yesha's painting, as she uploaded it. If this is ever set to null, the Painting print is left out entirely.
@@ -154,7 +154,7 @@ export function Darkroom() {
         {menu && <div id="dr-menu" className="dr-menu">{NAV.map(([id, label]) => <button key={id} type="button" onClick={() => go(id)}>{label}</button>)}</div>}
       </nav>
 
-      {/* 1. The opening: the live hero becomes print 001 */}
+      {/* 1. The opening: the live hero becomes the first print on the line */}
       <section ref={opening} className="dr-opening" data-light="safe" aria-label="Introduction">
         <div className="dr-opening-stage">
           <div className="dr-safelight" aria-hidden="true"><span className="dr-lamp" /><span className="dr-cone" /></div>
@@ -167,7 +167,7 @@ export function Darkroom() {
         </div>
       </section>
 
-      {/* 2. About: the words that go with print 001 */}
+      {/* 2. About: the words that go with the hero's print */}
       <section id="about" className="dr-section dr-about" data-light="safe" aria-labelledby="about-title">
         <span id="building" className="dr-anchor" aria-hidden="true" />{/* the hero's own About button */}
         <div className="dr-copy">
@@ -177,7 +177,10 @@ export function Darkroom() {
           {ABOUT.slice(1).map(t => <p key={t}>{t}</p>)}
           <div className="dr-actions">
             <button type="button" className="is-solid" onClick={() => go('work')}>See my projects <ArrowRight size={15} aria-hidden="true" /></button>
-            <a href={P.resumePdf} target="_blank" rel="noreferrer">Résumé <ArrowUpRight size={15} aria-hidden="true" /></a>
+            <span className="dr-cv-pair">
+              <a href={P.resumePdf} target="_blank" rel="noreferrer">Résumé <ArrowUpRight size={15} aria-hidden="true" /></a>
+              <a href={P.resumePdf} download="Yesha_Bhavsar_Resume.pdf"><Download size={15} aria-hidden="true" /> Download PDF</a>
+            </span>
             <a href={P.links.linkedin} target="_blank" rel="noreferrer"><Linkedin size={15} aria-hidden="true" /> LinkedIn</a>
             <a href={P.links.github} target="_blank" rel="noreferrer"><Github size={15} aria-hidden="true" /> GitHub</a>
           </div>
